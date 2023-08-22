@@ -1,12 +1,21 @@
 <template>
   <footer>
-    <p>Copyright © {{ year }}. Catalogue de <strong>{{ movieCount }}</strong> films.</p>
+    <p>Copyright © {{ year }}. Catalogue de <strong>{{ movies.length }}</strong> films.</p>
   </footer>
 </template>
 
 <script setup>
+  import { ref, onBeforeMount } from 'vue';
+  import { getMovie } from '@/services/api.js';
+
   const year = new Date().getFullYear();
-  const movieCount = 24686;
+  const movies = ref('');
+
+  onBeforeMount(() => {
+    getMovie()
+      .then(response => movies.value = response)
+      .catch(error => console.error(error));
+  });
 </script>
 
 <style lang="scss" scoped>

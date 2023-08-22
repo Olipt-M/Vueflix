@@ -22,7 +22,6 @@ body {
   background: $light_background_color;
   color: $dark_text_color;
   min-height: 100vh;
-  width: 100vw;
   font-family: 'Nunito', sans-serif;
 }
 </style>
