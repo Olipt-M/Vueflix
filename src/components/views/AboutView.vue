@@ -7,7 +7,9 @@
         :picture="person.picture"
         :name="person.name"
         :job="person.job"
-        :biography="person.biography">
+        :biography="person.biography"
+        :isOpened="selectedBiography === person.name"
+        @biography="openBiography">
       </TeamCard>
     </div>
   </div>
@@ -17,29 +19,39 @@
   import { ref } from 'vue';
   import TeamCard from '@/components/cards/TeamCard.vue';
 
+  const selectedBiography = ref(undefined);
+  const openBiography = (name) => selectedBiography.value = name;
+
   const team = ref([
     {
       picture: "https://i.pravatar.cc/310",
       name: "Babar",
       job: "Roi",
-      biography: "Je suis roi depuis peu, et je n'aime pas Rataxès."
+      biography: "Je suis roi depuis peu, et je n'aime pas Rataxès.",
+      isOpened: false
     },
     {
       picture: "https://i.pravatar.cc/450",
       name: "Zéphir",
       job: "Saltimbanque",
-      biography: "Je suis un singe et j'aime bien la voltige."
+      biography: "Je suis un singe et j'aime bien la voltige.",
+      isOpened: false
     },
     {
       picture: "https://i.pravatar.cc/570",
       name: "Rataxès",
       job: "Méchant",
-      biography: "HAHAHAHAHA !!"
+      biography: "HAHAHAHAHA !!... Hein ?",
+      isOpened: false
     }
   ]);
 </script>
 
 <style lang="scss" scoped>
+  $desktopNumber: 3;
+  $tabletNumber: 2;
+  $gapCards: 1rem;
+
   h1 {
     text-align: center;
     margin-top: 3rem;
@@ -49,11 +61,25 @@
 
   .cards-container {
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin: 2rem 0;
+    flex-wrap: wrap;
+    margin: 2rem 1rem;
+    gap: $gapCards;
   }
   .cards {
-    margin: 1rem;
+    // margin: $marginCards;
+    width: calc(100% / $desktopNumber - ($gapCards * ($desktopNumber - 1) / $desktopNumber));
+  }
+
+  @media (max-width: 920px) {
+    .cards {
+      width: calc(100% / $tabletNumber - ($gapCards * ($tabletNumber - 1) / $tabletNumber));
+    }
+  }
+
+  @media (max-width: 600px) {
+    .cards {
+      width: 100%;
+    }
   }
 </style>

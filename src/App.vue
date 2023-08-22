@@ -26,3 +26,10 @@ body {
   font-family: 'Nunito', sans-serif;
 }
 </style>
+
+<style scoped>
+  hr {
+    color: rgb(183, 182, 182);
+    margin: 0 2rem;
+  }
+</style>

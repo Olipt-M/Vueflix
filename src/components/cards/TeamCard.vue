@@ -6,13 +6,17 @@
     </div>
     <div>
       <p id="job">{{ job }}</p>
-      <MainButton>Voir biographie</MainButton>
+      <MainButton v-if="!isOpened" @click="openBiography(name)">Voir biographie</MainButton>
+      <p v-else>{{ biography }}</p>
     </div>
   </div>
 </template>
 
 <script setup>
   import MainButton from '@/components/buttons/MainButton.vue';
+
+  const emit = defineEmits(['biography']);
+  const openBiography = (name) => emit('biography', name);
 
   const props = defineProps({
     picture: {
@@ -30,6 +34,10 @@
     biography: {
         type: String,
         required: true
+    },
+    isOpened: {
+      type: Boolean,
+      required: true
     }
   });
 </script>
@@ -42,7 +50,7 @@
     padding: 1rem 0.5rem;
     background: $primary_card_background_color;
     border-radius: 10px;
-    width: 30%;
+    gap: 0.5rem;
 
     > div {
       display: flex;
