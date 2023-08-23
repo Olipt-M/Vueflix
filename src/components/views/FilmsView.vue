@@ -1,5 +1,6 @@
 <template>
   <h1>Films</h1>
+  <TailSpin v-show="!isViewCreated" class="loader"/>
   <div class="movies-container">
     <MovieCard v-for="movie in movies" :key="movie.id" :movie="movie" class="cards"/>
   </div>
@@ -8,15 +9,21 @@
 <script setup>
   import { ref, onBeforeMount } from 'vue';
   import MovieCard from '@/components/cards/MovieCard.vue';
-  import { getMovie } from '@/services/api.js';
+  import TailSpin from '@/components/icons/TailSpin.vue';
+  import { getMovies } from '@/services/api.js';
 
   const movies = ref(undefined);
+  const isViewCreated = ref(false);
 
   onBeforeMount(() => {
-    getMovie()
+    setTimeout(() => {
+      getMovies()
       .then(response => movies.value = response)
       .catch(error => console.error(error));
+      isViewCreated.value = true;
+    }, "1500");
   });
+
 </script>
 
 <style lang="scss" scoped>
@@ -31,6 +38,11 @@
     margin-top: 3rem;
     font-size: $font_size_xl;
     font-weight: 600;
+  }
+
+  .loader {
+    display: block;
+    margin: 5rem auto;
   }
 
   .movies-container {

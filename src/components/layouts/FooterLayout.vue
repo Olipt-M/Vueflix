@@ -6,13 +6,13 @@
 
 <script setup>
   import { ref, onBeforeMount } from 'vue';
-  import { getMovie } from '@/services/api.js';
+  import { getMovies } from '@/services/api.js';
 
   const year = new Date().getFullYear();
   const movies = ref('');
 
   onBeforeMount(() => {
-    getMovie()
+    getMovies()
       .then(response => movies.value = response)
       .catch(error => console.error(error));
   });
