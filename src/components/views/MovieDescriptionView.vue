@@ -37,7 +37,7 @@
     </div>
 
     <div class="comments-container">
-      <h2>Commentaires ({{ comments.length }})  </h2>
+      <h2>Commentaires ({{ comments.length }})</h2>
       <div class="new-comment-container">
         <label for="comments">Ajouter un commentaire</label>
         <textarea
@@ -60,8 +60,7 @@
         <div class="comment" v-for="comment in comments.sort((a, b) => b.createdAt < a.createdAt ? -1 : 1)" :key="comment.id">
           <div>
             <img :src="`https://i.pravatar.cc/150?u=${Math.random() * 1000}`" alt="Avatar picture">
-            <span>Ecrit par {{ comment.user.name }} le {{ dayjs(comment.createdAt).format('DD MMMM YYYY') }}
-               à {{ dayjs(comment.createdAt).format('HH:mm') }}</span>
+            <span>Ecrit par {{ comment.user.name }} le {{ dayjs(comment.createdAt).format('DD MMMM YYYY à HH:mm') }}</span>
           </div>
           <p>{{ comment.message }}</p>
         </div>
@@ -71,7 +70,7 @@
 </template>
 
 <script setup>
-  import { ref, computed, watch } from 'vue';
+  import { ref, computed } from 'vue';
   import { useRoute } from 'vue-router';
   import MainButton from '@/components/buttons/MainButton.vue';
   import PlayIcon from '@/components/icons/PlayIcon.vue';
@@ -107,6 +106,7 @@
   const comments = ref([]);
   getComments(movieId.value)
     .then(response => comments.value = response)
+    .then(response => console.log(response))
     .catch(error => console.error(error));
 
   const newComment = ref('');
@@ -117,13 +117,13 @@
   });
 
   // 2. Send and display a new comment
-  const sendNewComment = () => {
-    sendComment()
-      .then(response => console.log(response))
-      .catch(error => console.error(error));
-  };
-  // { id: 'Céleste', body: newComment.value }
-  // { "posts": [{ "id": "Céleste", "title": "newComment.value" }], "profile": { "name": "typicode" } }
+  // const sendNewComment = () => {
+  //   sendComment(movieId.value, { userId: 1, message: newComment.value })
+  //     .then(() => getComments(movieId.value).then(response => comments.value = response))
+  //     .catch(error => console.error(error));
+
+  //   newComment.value = '';
+  // };
 </script>
 
 <style lang="scss" scoped>

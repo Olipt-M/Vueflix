@@ -5472,34 +5472,18 @@
       "userId": 1
     },
     {
-      "createdAt": 1692951371789,
-      "movieId": "[object Object]",
-      "id": 4
+      "userId": 1,
+      "message": "Coucou",
+      "createdAt": 1692972010600,
+      "movieId": "346698",
+      "id": 22
     },
     {
-      "createdAt": 1692951445838,
-      "movieId": "[object Object]",
-      "id": 5
-    },
-    {
-      "createdAt": 1692951526838,
-      "movieId": "[object Object]",
-      "id": 6
-    },
-    {
-      "createdAt": 1692951555094,
-      "movieId": "[object Object]",
-      "id": 7
-    },
-    {
-      "createdAt": 1692952379971,
-      "movieId": "[object Object]",
-      "id": 8
-    },
-    {
-      "createdAt": 1692953155303,
-      "movieId": "[object Object]",
-      "id": 9
+      "userId": 1,
+      "message": "Coucou",
+      "createdAt": 1692972214530,
+      "movieId": "298618",
+      "id": 23
     }
   ],
   "users": [

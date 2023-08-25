@@ -13,6 +13,6 @@ export const getComments = async (movieId) => {
   return api(`/movies/${movieId}/comments?_expand=user`, { method: 'GET' });
 }
 
-export const sendComment = async (movieId) => {
-  return api(`/movies/${movieId}/comments`, { method: 'POST' });
+export const sendComment = async (movieId, comment) => {
+  return api(`/movies/${movieId}/comments`, { method: 'POST', body: comment });
 }
