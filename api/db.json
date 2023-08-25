@@ -5472,18 +5472,25 @@
       "userId": 1
     },
     {
-      "userId": 1,
+      "id": 1,
       "message": "Coucou",
       "createdAt": 1692972010600,
-      "movieId": "346698",
-      "id": 22
+      "movieId": 346698,
+      "userId": 1
     },
     {
       "userId": 1,
-      "message": "Coucou",
-      "createdAt": 1692972214530,
+      "message": "Retest ?",
+      "createdAt": 1692977065354,
+      "movieId": "346698",
+      "id": 4
+    },
+    {
+      "userId": 1,
+      "message": "Ca va vite",
+      "createdAt": 1692977290232,
       "movieId": "298618",
-      "id": 23
+      "id": 5
     }
   ],
   "users": [

@@ -1,8 +1,9 @@
 <template>
   <WatchVideoModal v-if="toggleTrailerModal"
-  :movieInfo="movieAndActors"
-  @trailerModal="closeTrailerModal()"
-  class="watch-video-modal"/>
+    :movieInfo="movieAndActors"
+    :toggleTrailerModal="toggleTrailerModal"
+    @trailerModal="closeTrailerModal()"
+    class="watch-video-modal"/>
   <div class="container">
     <div class="movie-description">
       <img :src="movieAndActors.backdrop_path" :alt="`Backdrop of ${movieAndActors.title}`" class="backdrop">
@@ -106,24 +107,23 @@
   const comments = ref([]);
   getComments(movieId.value)
     .then(response => comments.value = response)
-    .then(response => console.log(response))
     .catch(error => console.error(error));
 
   const newComment = ref('');
   const isCommentEmpty = computed(() => {
-    if (newComment.value.length === 0) {
+    if (newComment.value.trim().length === 0) {
       return true;
     }
   });
 
   // 2. Send and display a new comment
-  // const sendNewComment = () => {
-  //   sendComment(movieId.value, { userId: 1, message: newComment.value })
-  //     .then(() => getComments(movieId.value).then(response => comments.value = response))
-  //     .catch(error => console.error(error));
+  const sendNewComment = () => {
+    sendComment(movieId.value, { userId: 1, message: newComment.value })
+      .then(() => getComments(movieId.value).then(response => comments.value = response))
+      .catch(error => console.error(error));
 
-  //   newComment.value = '';
-  // };
+    newComment.value = '';
+  };
 </script>
 
 <style lang="scss" scoped>
