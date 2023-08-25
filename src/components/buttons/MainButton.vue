@@ -17,7 +17,7 @@
     font-family: 'Nunito', sans-serif;
     font-size: $font_size_normal;
 
-    &:hover {
+    &:not(.disabled):hover {
       background: $primary_button_hover_background_color;
     }
   }

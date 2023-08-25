@@ -6,7 +6,7 @@
   const props = defineProps({
     rating: {
       type: Number,
-      required: true
+      required: false
     }
   });
 

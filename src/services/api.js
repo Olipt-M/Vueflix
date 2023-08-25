@@ -8,3 +8,11 @@ export const getMovies = async () => {
 export const getMovieAndActors = async (movieId) => {
   return api(`/movies/${movieId}?_expand=genre&_expand=actors`, { method: 'GET' });
 }
+
+export const getComments = async (movieId) => {
+  return api(`/movies/${movieId}/comments?_expand=user`, { method: 'GET' });
+}
+
+export const sendComment = async (movieId) => {
+  return api(`/movies/${movieId}/comments`, { method: 'POST' });
+}

@@ -1,18 +1,23 @@
 <template>
   <div class="container">
     <img :src="actor.profile_path" :alt="actor.name">
-    <h3>{{ actor.name }} ({{ actor.birthday }})</h3>
+    <h3>{{ actor.name }} ({{ calculateAge(actor.birthday) }} ans)</h3>
     <p>{{ actor.character }}</p>
   </div>
 </template>
 
 <script setup>
+  import dayjs from 'dayjs' // ES 2015
   const props = defineProps({
     actor: {
       type: Object,
       required: true
     }
   });
+
+  const calculateAge = (birthday) => {
+    return dayjs().diff(dayjs(birthday), 'year');
+  }
 </script>
 
 <style lang="scss" scoped>
