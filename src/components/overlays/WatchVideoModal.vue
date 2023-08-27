@@ -1,5 +1,5 @@
 <template>
-  <transition name="modal">
+  <Transition name="modal">
     <div v-if="toggleTrailerModal" class="modal-container" @click.self="closeTrailerModal()">
       <div class="modal">
         <div class="modal-content">
@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-  </transition>
+  </Transition>
   
 </template>
 

@@ -16,3 +16,11 @@ export const getComments = async (movieId) => {
 export const sendComment = async (movieId, comment) => {
   return api(`/movies/${movieId}/comments`, { method: 'POST', body: comment });
 }
+
+export const createNewAccount = async (credentials) => {
+  return api(`/users`, { method: 'POST', body: credentials });
+}
+
+export const signIn = async (credentials) => {
+  return api(`/signin`, { method: 'POST', body: credentials });
+}

@@ -5491,6 +5491,13 @@
       "createdAt": 1692977290232,
       "movieId": "298618",
       "id": 5
+    },
+    {
+      "userId": 1,
+      "message": "Ce film m'a ébloui.",
+      "createdAt": 1693141428014,
+      "movieId": "298618",
+      "id": 6
     }
   ],
   "users": [

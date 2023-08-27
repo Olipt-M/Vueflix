@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="view-container">
     <h1>A propos</h1>
     <div class="cards-container">
       <TeamCard class="cards" v-for="(person, index) in team"

@@ -25,7 +25,7 @@
     display: flex;
     flex-direction: column;
     background: $primary_card_background_color;
-    height: 275px;
+    height: 300px;
     border-radius: 10px;
   }
 

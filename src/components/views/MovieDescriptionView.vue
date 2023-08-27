@@ -1,5 +1,5 @@
 <template>
-  <WatchVideoModal v-if="toggleTrailerModal"
+  <WatchVideoModal v-show="toggleTrailerModal"
     :movieInfo="movieAndActors"
     :toggleTrailerModal="toggleTrailerModal"
     @trailerModal="closeTrailerModal()"
@@ -138,30 +138,34 @@
 
   .movie-description{
     width: 100%;
-    height: 480px;
+    min-height: 480px;
     display: flex;
     align-items: center;
     position: relative;
 
-    .backdrop {
+    .backdrop, .overlay {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      max-height: 100%;
+      height: 100%;
+    }
+
+    .backdrop {
       object-fit: cover;
       object-position: center;
       z-index: 10;
     }
 
     .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
       z-index: 20;
       background: rgba(0, 0, 0, 0.6);
+    }
+  }
+
+  @media (max-width: 770px) {
+    .movie-description {
+      flex-direction: column;
     }
   }
 
@@ -180,6 +184,7 @@
     z-index: 30;
     margin-right: 1.5rem;
     color: $light_text_color;
+    padding: 2rem 0;
 
     h2 {
       margin: 1rem 0;
@@ -213,17 +218,38 @@
   }
 
   .actors-cards-container {
-    margin-top: 2rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-items: center;
+    margin: 2rem 1rem 0 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     gap: 0.5rem;
   }
 
-  .actor-card {
-    width: 20%;
+  @media (max-width: 1280px) {
+    .actors-cards-container {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
   }
+
+@media (max-width: 1030px) {
+  .actors-cards-container {
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 2rem 0 0 0;
+  }
+}
+
+@media (max-width: 770px) {
+  .actors-cards-container {
+    grid-template-columns: 1fr 1fr;
+    margin: 2rem 0 0 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .actors-cards-container {
+    grid-template-columns: 1fr;
+    margin: 2rem 0 0 0;
+  }
+}
 
   .comments-container {
     margin: 2rem 1rem 0 1rem;
@@ -249,7 +275,7 @@
       textarea {
         min-width: 250px;
         width: 100%;
-        min-height: 30px;
+        min-height: 60px;
         margin-bottom: 0.2rem;
         border: none;
         border-radius: 7px;
@@ -260,6 +286,12 @@
       .send-comment-button.disabled {
         opacity: 0.5;
         cursor: default;
+      }
+    }
+
+    @media (max-width: 770px) {
+      .new-comment-container {
+        width: 100%;
       }
     }
 

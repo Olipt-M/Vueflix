@@ -10,7 +10,9 @@
       <div v-else class="if-connected-container">
         <span>{{ userAvatar }}</span>
         <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" class="avatar-image">
-        <button type="button" @click="loginStore.switchConnectedStatus()">X</button>
+        <MainButton @click="loginStore.switchConnectedStatus()">
+          <RouterLink :to="{name: 'login'}" class="nav-link">Déconnexion</RouterLink>
+        </MainButton>
       </div>
     </div>
   </nav>
@@ -62,14 +64,6 @@ li {
       width: 2.5rem;
       height: 2.5rem;
       border-radius: 50%;
-    }
-
-    button {
-      background: none;
-      border: none;
-      color: $light_text_color;
-      font-size: $font_size_normal;
-      cursor: pointer;
     }
   }
 </style>
