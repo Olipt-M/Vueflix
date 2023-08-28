@@ -13,13 +13,13 @@
         <!-- <p class="missing-info-message">{{ missingInfoMessage }}</p> -->
 
         <label v-if="!hasAnAccount" for="pseudo">Quel sera votre pseudo ?</label>
-        <input v-if="!hasAnAccount" type="text" id="pseudo" v-model="newUser.pseudo" required autocomplete="username"/>
+        <input v-if="!hasAnAccount" type="text" id="pseudo" v-model="user.pseudo" required autocomplete="username"/>
 
         <label for="email">Entrez votre e-mail :</label>
-        <input type="email" id="email" v-model="newUser.email" required autocomplete="email"/>
+        <input type="email" id="email" v-model="user.email" required autocomplete="email"/>
 
         <label for="password">Entrez votre mot de passe :</label>
-        <input type="password" id="password" v-model="newUser.password" required autocomplete="current-password"/>
+        <input type="password" id="password" v-model="user.password" required autocomplete="current-password"/>
 
         <MainButton class="form-button" type="submit">C'est parti !</MainButton>
       </form>
@@ -36,26 +36,29 @@
 
   const hasAnAccount = ref(true);
   const loginStore = useLoginStore();
-  const newUser = ref({ pseudo: '', email: '', password: '' });
-  // const redirectLink = ref('');
+  const user = ref({ pseudo: '', email: '', password: '' });
   // const router = useRouter();
 
   const login = () => {
     if (!hasAnAccount.value) {
       console.log(`newUser: ${newUser.value}`);
-      createNewAccount({ name: newUser.value.pseudo, email: newUser.value.email, password: newUser.value.password })
+      createNewAccount({ name: user.value.pseudo, email: user.value.email, password: user.value.password })
       .then(response => console.log(response))
       // .then(response => {
       //   if (response.success === false) {
       //     missingInfoMessage.value = response.message;
-      //     redirectLink.value = 'connection';
       //   } else {
-      //     connectionStore.switchToConnected();
-      //     router.push({ name: 'swipe'});
+      //     loginStore.authenticateUser(response); // Il faut renvoyer l'id, le pseudo et le mail
+      //     router.push({ name: 'homepage'});
       //   }
       // })
       .catch(error => console.error(error));
     }
+    // else {
+    //   signIn ({ email: user.value.email, password: user.value.password })
+    //     .then(response => console.log(response))
+    //     .catch(error => console.error(error));
+    // }
   };
 </script>
 

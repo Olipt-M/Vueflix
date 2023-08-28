@@ -6,11 +6,13 @@
       <li><RouterLink :to="{name: 'about'}" class="nav-link">A propos</RouterLink></li>
     </ul>
     <div class="connection-container">
-      <MainButton v-if="!loginStore.isConnected" @click="loginStore.switchConnectedStatus()">Connexion</MainButton>
+      <MainButton v-if="!loginStore.isAuthenticated">
+        <RouterLink :to="{name: 'login'}" class="nav-link">Connexion</RouterLink>
+      </MainButton>
       <div v-else class="if-connected-container">
-        <span>{{ userAvatar }}</span>
+        <!-- <span>{{ user.name }}</span> -->
         <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" class="avatar-image">
-        <MainButton @click="loginStore.switchConnectedStatus()">
+        <MainButton @click="loginStore.disconnectUser()">
           <RouterLink :to="{name: 'login'}" class="nav-link">Déconnexion</RouterLink>
         </MainButton>
       </div>
@@ -24,7 +26,7 @@
   import { useLoginStore } from '@/stores/loginStore.js';
 
   const loginStore = useLoginStore();
-  const userAvatar = "Céleste";
+  // const user = loginStore.getAuthenticatedUser();
 </script>
 
 <style lang="scss" scoped>
