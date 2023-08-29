@@ -7,16 +7,17 @@ export const useShopStore = defineStore('shop', {
     }
   },
   actions: {
-    addToCart(product) {
-      this.moviesInCart.push(product);
+    addToCart(movie) {
+      this.moviesInCart.push(movie);
     },
-    // removeFromCart(product) {
-      
-    // }
+    removeFromCart(movie) {
+      this.moviesInCart.splice(this.moviesInCart.indexOf(movie), 1);
+    }
   },
   getters: {
-    nbMoviesInCart(state) {
-      return state.moviesInCart.length;
+    nbMoviesInCart: (state) => state.moviesInCart.length,
+    isInCart: (state) => {
+      return (movieId) => state.moviesInCart.some(movie => movie.id === movieId);
     }
   }
 });

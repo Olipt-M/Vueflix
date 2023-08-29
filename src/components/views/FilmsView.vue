@@ -2,7 +2,10 @@
   <h1>Films</h1>
   <TailSpin v-show="!isViewCreated" class="loader"/>
   <div class="movies-container">
-    <MovieCard v-for="movie in movies" :key="movie.id" :movie="movie" class="cards"/>
+    <MovieCard v-for="movie in movies" :key="movie.id"
+      :movie="movie"
+      :isInCart="shopStore.isInCart(movie.id)"
+      class="cards"/>
   </div>
 </template>
 
@@ -11,6 +14,8 @@
   import MovieCard from '@/components/cards/MovieCard.vue';
   import TailSpin from '@/components/icons/TailSpin.vue';
   import { getMovies } from '@/services/api.js';
+  import { useShopStore } from '@/stores/shopStore.js';
+  const shopStore = useShopStore();
 
   const movies = ref(undefined);
   const isViewCreated = ref(false);

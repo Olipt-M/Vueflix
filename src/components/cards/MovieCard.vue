@@ -9,7 +9,8 @@
     </div>
     <h2><router-link :to="{name: 'movie', params: {id: movie.id}}" class="title-link">{{ movie.title }}</router-link></h2>
     <p>{{ dayjs(movie.release_date).format('DD MMMM YYYY') }}</p>
-    <MainButton class="button" @click="shopStore.addToCart(movie)">Ajouter au panier</MainButton>
+    <MainButton v-if="!isInCart" class="button" @click="shopStore.addToCart(movie)">Ajouter au panier</MainButton>
+    <MainButton v-else class="button" @click="shopStore.removeFromCart(movie)">Retirer du panier</MainButton>
   </div>
 </template>
 
@@ -25,6 +26,10 @@
   const props = defineProps({
     movie: {
       type: Object,
+      required: true
+    },
+    isInCart: {
+      type: Boolean,
       required: true
     }
   });

@@ -21,6 +21,7 @@
     border: none;
     cursor: pointer;
     background: none;
+    position: relative;
 
     &:hover {
       transform: translate(1px, 1px);
@@ -34,6 +35,9 @@
     width: 20px;
     height: 20px;
     font-weight: bold;
+    position: absolute;
+    top: -2px;
+    right: -2px;
   }
 
   .shopping-icon {
