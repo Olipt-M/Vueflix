@@ -6,11 +6,10 @@
         <img :src="movie.poster_path" :alt="movie.title">
       </router-link>
       <RatingFeature class="rating" :rating="movie.vote_average"/>
-      <!-- <span class="rating" :style="defineRatingColor(movie.vote_average)">{{ Math.round(movie.vote_average * 10) }}%</span> -->
     </div>
     <h2><router-link :to="{name: 'movie', params: {id: movie.id}}" class="title-link">{{ movie.title }}</router-link></h2>
     <p>{{ dayjs(movie.release_date).format('DD MMMM YYYY') }}</p>
-    <MainButton class="button">Ajouter au panier</MainButton>
+    <MainButton class="button" @click="shopStore.addToCart(movie)">Ajouter au panier</MainButton>
   </div>
 </template>
 
@@ -19,6 +18,9 @@
   import RatingFeature from '@/components/features/RatingFeature.vue';
   import dayjs from 'dayjs' // ES 2015
   import { RouterLink } from 'vue-router';
+  import { useShopStore } from '@/stores/shopStore.js';
+
+  const shopStore = useShopStore();
 
   const props = defineProps({
     movie: {
@@ -26,16 +28,6 @@
       required: true
     }
   });
-
-  // const defineRatingColor = (rating) => {
-  //   if (rating < 4) {
-  //     return {borderColor: 'red'}
-  //   } else if (rating >= 4 && rating < 7) {
-  //     return {borderColor: 'rgb(218, 222, 3)'}
-  //   } else {
-  //     return {borderColor: 'rgb(70, 203, 8)'}
-  //   }
-  // };
 </script>
 
 <style lang="scss" scoped>

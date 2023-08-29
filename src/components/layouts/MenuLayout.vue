@@ -17,12 +17,16 @@
         </MainButton>
       </div>
     </div>
+    <div class="shopping-indicator">
+      <ShoppingIndicator />
+    </div>
   </nav>
 </template>
 
 <script setup>
   import { RouterLink } from 'vue-router';
   import MainButton from '@/components/buttons/MainButton.vue';
+  import ShoppingIndicator from '@/components/layouts/ShoppingIndicator.vue';
   import { useLoginStore } from '@/stores/loginStore.js';
 
   const loginStore = useLoginStore();
