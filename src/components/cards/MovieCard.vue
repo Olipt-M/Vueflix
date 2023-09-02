@@ -65,20 +65,9 @@
   }
 
   .rating {
-    position: absolute; //garder ici
-    left: 5px; //garder ici
-    bottom: 10px; //garder ici
-    // color: $light_text_color;
-    // background-color: black;
-    // font-weight: bold;
-    // border: 3px solid;
-    // border-radius: 50%;
-    // font-size: $font_size_normal;
-    // width: 3rem;
-    // height: 3rem;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
+    position: absolute;
+    left: 5px;
+    bottom: 10px;
   }
 
   h2, p {

@@ -80,6 +80,8 @@
   import WatchVideoModal from '@/components/overlays/WatchVideoModal.vue';
   import { getMovieAndActors, getComments, sendComment } from '@/services/api.js';
   import dayjs from 'dayjs' // ES 2015
+  import { useLoginStore } from '@/stores/loginStore.js';
+  const loginStore = useLoginStore();
 
   const movieAndActors = ref({});
   const movieGenre = ref({});
@@ -118,7 +120,7 @@
 
   // 2. Send and display a new comment
   const sendNewComment = () => {
-    sendComment(movieId.value, { userId: 1, message: newComment.value })
+    sendComment(movieId.value, { userId: loginStore.getAuthenticatedUser.id, message: newComment.value })
       .then(() => getComments(movieId.value).then(response => comments.value = response))
       .catch(error => console.error(error));
 

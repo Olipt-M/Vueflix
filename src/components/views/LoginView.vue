@@ -2,15 +2,18 @@
   <div class="view-container">
     <h1 v-if="hasAnAccount">Connexion</h1>
     <h1 v-else>Inscription</h1>
-    <div v-if="hasAnAccount" class="sign-up-message">
+
+    <div v-if="hasAnAccount" class="login-button">
       <MainButton @click="hasAnAccount = !hasAnAccount">Pas encore inscrit ? Je crée un compte !</MainButton>
     </div>
-    <div v-else class="sign-up-message">
+    <div v-else class="login-button">
       <MainButton @click="hasAnAccount = !hasAnAccount">Déjà inscrit ? Je me connecte</MainButton>
     </div>
+
+    <p class="error-message">{{ errorMessage }}</p>
+    
     <div class="form-container">
       <form @submit.prevent="login">
-        <!-- <p class="missing-info-message">{{ missingInfoMessage }}</p> -->
 
         <label v-if="!hasAnAccount" for="pseudo">Quel sera votre pseudo ?</label>
         <input v-if="!hasAnAccount" type="text" id="pseudo" v-model="user.pseudo" required autocomplete="username"/>
@@ -29,36 +32,36 @@
 
 <script setup>
   import { ref } from 'vue';
+  import MainButton from '@/components/buttons/MainButton.vue';
   import { createNewAccount, signIn } from '@/services/api.js';
   import { useLoginStore } from '@/stores/loginStore.js';
+  const loginStore = useLoginStore();
   import { useRouter } from 'vue-router';
-  import MainButton from '@/components/buttons/MainButton.vue';
+  const router = useRouter();
 
   const hasAnAccount = ref(true);
-  const loginStore = useLoginStore();
   const user = ref({ pseudo: '', email: '', password: '' });
-  // const router = useRouter();
+  const errorMessage = ref('');
 
   const login = () => {
     if (!hasAnAccount.value) {
-      console.log(`newUser: ${newUser.value}`);
       createNewAccount({ name: user.value.pseudo, email: user.value.email, password: user.value.password })
-      .then(response => console.log(response))
-      // .then(response => {
-      //   if (response.success === false) {
-      //     missingInfoMessage.value = response.message;
-      //   } else {
-      //     loginStore.authenticateUser(response); // Il faut renvoyer l'id, le pseudo et le mail
-      //     router.push({ name: 'homepage'});
-      //   }
-      // })
-      .catch(error => console.error(error));
+      .then(response => {
+          // console.log(response.user);
+          loginStore.authenticateUser(response.user);
+          router.push({ name: 'homepage'});
+      })
+      .catch((error) => errorMessage.value = error);
     }
-    // else {
-    //   signIn ({ email: user.value.email, password: user.value.password })
-    //     .then(response => console.log(response))
-    //     .catch(error => console.error(error));
-    // }
+    else {
+      signIn ({ email: user.value.email, password: user.value.password })
+        .then(response => {
+          // console.log(response.user);
+          loginStore.authenticateUser(response.user);
+          router.push({ name: 'homepage'});
+        })
+      .catch((error) => errorMessage.value = error);
+    }
   };
 </script>
 
@@ -74,23 +77,25 @@
     font-weight: 600;
   }
 
-  .sign-up-message {
+  .login-button {
     text-align: center;
     button {
       font-size: $font_size_small;
     }
   }
+
+.error-message {
+  color: red;
+  margin-top: 2em;
+  font-style: italic;
+  text-align: center;
+  font-size: $font_size_small;
+}
   
   .form-container {
     width: 350px;
     margin: auto;
     margin-top: 2em;
-  }
-
-  .missing-info-message {
-    color: red;
-    margin-bottom: 1em;
-    font-style: italic;
   }
 
   form {

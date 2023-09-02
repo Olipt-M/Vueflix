@@ -1,5 +1,6 @@
 <template>
   <footer>
+    <hr>
     <p>Copyright © {{ year }}. Catalogue de <strong>{{ movies.length }}</strong> films.</p>
   </footer>
 </template>
@@ -20,13 +21,15 @@
 
 <style lang="scss" scoped>
   footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
+    hr {
+      color: rgb(183, 182, 182);
+      margin: 0 2rem;
+    }
     
     p {
+      text-align: center;
       font-size: $font_size_small;
+      padding: 2rem;
     }
   }
 </style>

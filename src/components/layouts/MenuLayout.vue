@@ -10,8 +10,8 @@
         <RouterLink :to="{name: 'login'}" class="nav-link">Connexion</RouterLink>
       </MainButton>
       <div v-else class="if-connected-container">
-        <!-- <span>{{ user.name }}</span> -->
-        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" class="avatar-image">
+        <span>{{ loginStore.getAuthenticatedUser.name }}</span>
+        <img src="https://i.pravatar.cc/150" alt="Avatar" class="avatar-image">
         <MainButton @click="loginStore.disconnectUser()">
           <RouterLink :to="{name: 'login'}" class="nav-link">Déconnexion</RouterLink>
         </MainButton>
@@ -30,7 +30,6 @@
   import { useLoginStore } from '@/stores/loginStore.js';
 
   const loginStore = useLoginStore();
-  // const user = loginStore.getAuthenticatedUser();
 </script>
 
 <style lang="scss" scoped>

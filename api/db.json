@@ -5498,6 +5498,13 @@
       "createdAt": 1693141428014,
       "movieId": "298618",
       "id": 6
+    },
+    {
+      "userId": 4,
+      "message": "Chouette ça me rappelle les Power Rangers !",
+      "createdAt": 1693585709007,
+      "movieId": "667538",
+      "id": 7
     }
   ],
   "users": [
@@ -5518,6 +5525,12 @@
       "name": "Marina",
       "email": "marina@boxydev.com",
       "password": "$2a$10$cPZoyVFBYStW.rcfVtWZBuhm4OBZzOTcYMaU/OTfc92UMHgb42ymK"
+    },
+    {
+      "email": "babar@gmail.com",
+      "password": "$2a$10$dI3ozT3rX3qxm0nfCJkcleXOiUpE0OYmnhV1.GuPoeYGmJdZKRg7q",
+      "name": "Babar",
+      "id": 4
     }
   ]
 }
