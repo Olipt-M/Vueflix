@@ -1,16 +1,21 @@
 <template>
-  <button class="shop-btn" type="button">
-    <RouterLink :to="{name: 'shop'}"><ShoppingIcon class="shopping-icon"/></RouterLink>
+  <button
+    class="shop-btn"
+    type="button"
+    @click="loginStore.isAuthenticated ? router.push({ name: 'shop'}) : loginStore.openNotConnectedOverlay()">
+    <ShoppingIcon class="shopping-icon"/>
     <div v-if="shopStore.nbMoviesInCart > 0" class="shopping-counter">{{ shopStore.nbMoviesInCart }}</div>
   </button>
 </template>
 
 <script setup>
   import ShoppingIcon from '@/components/icons/ShoppingIcon.vue';
-  import { RouterLink } from 'vue-router';
+  import { useLoginStore } from '@/stores/loginStore.js';
+  const loginStore = useLoginStore();
   import { useShopStore } from '@/stores/shopStore.js';
-
   const shopStore = useShopStore();
+  import { useRouter } from 'vue-router';
+  const router = useRouter();
 </script>
 
 <style lang="scss" scoped>

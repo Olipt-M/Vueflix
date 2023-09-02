@@ -3,7 +3,8 @@ import { defineStore } from 'pinia';
 export const useLoginStore = defineStore('login', {
   state: () => {
     return {
-      user: undefined
+      user: undefined,
+      requireNotConnectedOverlay: false,
     }
   },
   actions: {
@@ -12,6 +13,12 @@ export const useLoginStore = defineStore('login', {
     },
     disconnectUser() {
       this.user = undefined;
+    },
+    openNotConnectedOverlay() {
+      this.requireNotConnectedOverlay = true;
+    },
+    closeNotConnectedOverlay() {
+      this.requireNotConnectedOverlay = false;
     }
   },
   getters: {
@@ -20,6 +27,7 @@ export const useLoginStore = defineStore('login', {
     },
     getAuthenticatedUser(state) {
       return state.user;
-    }
+    },
+    isRequiredNotConnectedModal: (state) => state.requireNotConnectedOverlay,
   }
 });

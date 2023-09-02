@@ -51,7 +51,10 @@
           loginStore.authenticateUser(response.user);
           router.push({ name: 'homepage'});
       })
-      .catch((error) => errorMessage.value = error);
+      .catch((error) => {
+        errorMessage.value = error.data;
+        throw error.data;
+      });
     }
     else {
       signIn ({ email: user.value.email, password: user.value.password })
@@ -60,7 +63,10 @@
           loginStore.authenticateUser(response.user);
           router.push({ name: 'homepage'});
         })
-      .catch((error) => errorMessage.value = error);
+      .catch((error) => {
+        errorMessage.value = error.data;
+        throw error.data;
+      });
     }
   };
 </script>

@@ -9,7 +9,11 @@
     </div>
     <h2><router-link :to="{name: 'movie', params: {id: movie.id}}" class="title-link">{{ movie.title }}</router-link></h2>
     <p>{{ dayjs(movie.release_date).format('DD MMMM YYYY') }}</p>
-    <MainButton v-if="!isInCart" class="button" @click="shopStore.addToCart(movie)">Ajouter au panier</MainButton>
+    <MainButton v-if="!isInCart"
+      class="button"
+      @click="loginStore.isAuthenticated ? shopStore.addToCart(movie) : loginStore.openNotConnectedOverlay()">
+      Ajouter au panier
+    </MainButton>
     <MainButton v-else class="button" @click="shopStore.removeFromCart(movie)">Retirer du panier</MainButton>
   </div>
 </template>
@@ -20,8 +24,9 @@
   import dayjs from 'dayjs' // ES 2015
   import { RouterLink } from 'vue-router';
   import { useShopStore } from '@/stores/shopStore.js';
-
   const shopStore = useShopStore();
+  import { useLoginStore } from '@/stores/loginStore';
+  const loginStore = useLoginStore();
 
   const props = defineProps({
     movie: {
@@ -33,6 +38,10 @@
       required: true
     }
   });
+
+  // const addToCart = (movie) => {
+  //   shopStore.addToCart(movie);
+  // };
 </script>
 
 <style lang="scss" scoped>

@@ -17,6 +17,7 @@
   import { useShopStore } from '@/stores/shopStore.js';
   const shopStore = useShopStore();
 
+  // Get movies from API
   const movies = ref(undefined);
   const isViewCreated = ref(false);
 
@@ -28,7 +29,6 @@
       isViewCreated.value = true;
     }, "1500");
   });
-
 </script>
 
 <style lang="scss" scoped>
