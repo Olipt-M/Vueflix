@@ -18,6 +18,7 @@ export const useShopStore = defineStore('shop', {
     nbMoviesInCart: (state) => state.moviesInCart.length,
     isInCart: (state) => {
       return (movieId) => state.moviesInCart.some(movie => movie.id === movieId);
-    }
+    },
+    getMoviesInCart: (state) => state.moviesInCart,
   }
 });
