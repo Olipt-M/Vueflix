@@ -1,7 +1,6 @@
 <template>
   <nav>
     <ul>
-      <li><RouterLink :to="{name: 'homepage'}" class="nav-link">Accueil</RouterLink></li>
       <li><RouterLink :to="{name: 'films'}" class="nav-link">Films</RouterLink></li>
       <li><RouterLink :to="{name: 'about'}" class="nav-link">A propos</RouterLink></li>
     </ul>
@@ -12,14 +11,12 @@
       <div v-else class="if-connected-container">
         <span>{{ loginStore.getAuthenticatedUser.name }}</span>
         <img src="https://i.pravatar.cc/150" alt="Avatar" class="avatar-image">
-        <MainButton @click="loginStore.disconnectUser()">
+        <MainButton @click="disconnect()">
           <RouterLink :to="{name: 'login'}" class="nav-link">Déconnexion</RouterLink>
         </MainButton>
       </div>
     </div>
-    <div class="shopping-indicator">
-      <ShoppingIndicator />
-    </div>
+    <div><ShoppingIndicator/></div>
   </nav>
 </template>
 
@@ -28,8 +25,14 @@
   import MainButton from '@/components/buttons/MainButton.vue';
   import ShoppingIndicator from '@/components/layouts/ShoppingIndicator.vue';
   import { useLoginStore } from '@/stores/loginStore.js';
-
   const loginStore = useLoginStore();
+  import { useShopStore } from '@/stores/shopStore.js';
+  const shopStore = useShopStore();
+
+  const disconnect = () => {
+    shopStore.emptyCart();
+    loginStore.disconnectUser();
+  };
 </script>
 
 <style lang="scss" scoped>

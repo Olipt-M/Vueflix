@@ -12,6 +12,9 @@ export const useShopStore = defineStore('shop', {
     },
     removeFromCart(movie) {
       this.moviesInCart.splice(this.moviesInCart.indexOf(movie), 1);
+    },
+    emptyCart() {
+      this.moviesInCart = [];
     }
   },
   getters: {

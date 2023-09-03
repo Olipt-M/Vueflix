@@ -38,10 +38,6 @@
       required: true
     }
   });
-
-  // const addToCart = (movie) => {
-  //   shopStore.addToCart(movie);
-  // };
 </script>
 
 <style lang="scss" scoped>
