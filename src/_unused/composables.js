@@ -1,7 +1,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 export function useWindowSize() {
-  const width = ref(window.innerWidth);
-  const height = ref(window.innerHeight);
+  const width = ref(0);
+  const height = ref(0);
 
   function update() {
     width.value = window.innerWidth;

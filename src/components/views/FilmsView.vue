@@ -1,34 +1,54 @@
 <template>
   <h1>Films</h1>
-  <TailSpin v-show="!isViewCreated" class="loader"/>
   <div class="movies-container">
     <MovieCard v-for="movie in movies" :key="movie.id"
       :movie="movie"
       :isInCart="shopStore.isInCart(movie.id)"
       class="cards"/>
   </div>
+  <TailSpin v-show="!isViewLoaded" class="loader"/>
+  <MainButton v-show="isViewLoaded && page <= nbOfMovies / maxMoviesAtOnce" class="display-button" @click="displayMore()">Afficher plus</MainButton>
 </template>
 
 <script setup>
   import { ref, onBeforeMount } from 'vue';
   import MovieCard from '@/components/cards/MovieCard.vue';
   import TailSpin from '@/components/icons/TailSpin.vue';
-  import { getMovies } from '@/services/api.js';
+  import MainButton from '@/components/buttons/MainButton.vue';
+  import { getMovies, getNbOfMovies } from '@/services/api.js';
   import { useShopStore } from '@/stores/shopStore.js';
   const shopStore = useShopStore();
 
   // Get movies from API
   const movies = ref(undefined);
-  const isViewCreated = ref(false);
+  const isViewLoaded = ref(false);
+  const page = ref(1);
+  const maxMoviesAtOnce = ref(10);
+  const nbOfMovies = ref('');
+  
+  onBeforeMount(() => {
+    getNbOfMovies().then(response => nbOfMovies.value = response);
+  });
 
   onBeforeMount(() => {
     setTimeout(() => {
-      getMovies()
+      getMovies(page.value, maxMoviesAtOnce.value)
       .then(response => movies.value = response)
       .catch(error => console.error(error));
-      isViewCreated.value = true;
+      isViewLoaded.value = true;
     }, "1500");
   });
+
+  const displayMore = () => {
+    isViewLoaded.value = false;
+
+    setTimeout(() => {
+      getMovies(++page.value, maxMoviesAtOnce.value)
+      .then(response => movies.value = movies.value.concat(response))
+      .catch(error => console.error(error));
+      isViewLoaded.value = true;
+    }, "1500");
+  }
 </script>
 
 <style lang="scss" scoped>
@@ -84,5 +104,10 @@
     .cards {
       width: 100%;
     }
+  }
+
+  .display-button {
+    display: block;
+    margin: 0 auto 2rem auto;
   }
 </style>

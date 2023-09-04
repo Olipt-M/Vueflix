@@ -1,10 +1,9 @@
 <template>
   <header class="container">
     <p><span>Vue</span><span>Flix</span></p>
-    <!-- <div><MenuLayout/></div> -->
     
-    <div v-if="windowSize.width > 654"><MenuLayout/></div>
-    <div v-else class="menu-container">
+    <div class="extended-menu"><MenuLayout/></div>
+    <div class="burger-menu">
       <div><ShoppingIndicator/></div>
       <div><ButtonBurger/></div>
     </div>
@@ -17,8 +16,6 @@
   import ButtonBurger from '@/components/buttons/ButtonBurger.vue';
   import ShoppingIndicator from '@/components/layouts/ShoppingIndicator.vue';
   import MenuInBurgerLayout from '@/components/layouts/MenuInBurgerLayout.vue';
-  import { useWindowSize } from '@/services/composables.js';
-  const windowSize = useWindowSize();
 </script>
 
 <style lang="scss" scoped>
@@ -40,9 +37,21 @@
     }
   }
 
-  .menu-container {
+  .burger-menu {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  @media (max-width: 654px) {
+    .extended-menu {
+      display: none;
+    }
+  }
+
+  @media (min-width: 655px) {
+    .burger-menu {
+      display: none;
+    }
   }
 </style>

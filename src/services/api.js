@@ -1,9 +1,12 @@
 import { $fetch } from 'ohmyfetch'
 const api = $fetch.create({baseURL: 'http://localhost:3000'})
 
-export const getMovies = async () => {
-  return api('/movies', { method: 'GET' });
+export const getMovies = async (page = 1, maxMoviesAtOnce = 5) => {
+  return api(`/movies?_page=${page}&_limit=${maxMoviesAtOnce}`, { method: 'GET' });
 }
+
+export const getNbOfMovies = async () => api(`/movies`, { method: 'GET' })
+  .then(response => response.length)
 
 export const getMovieAndActors = async (movieId) => {
   return api(`/movies/${movieId}?_expand=genre&_expand=actors`, { method: 'GET' });
