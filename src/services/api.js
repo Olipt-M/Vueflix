@@ -1,5 +1,6 @@
 import { $fetch } from 'ohmyfetch'
-const api = $fetch.create({baseURL: 'http://localhost:3000'})
+// const api = $fetch.create({baseURL: 'http://localhost:3000'}) // local
+const api = $fetch.create({baseURL: 'https://api.vueflix.boxydev.com'}) // distant
 
 export const getMovies = async (page = 1, maxMoviesAtOnce = 5) => {
   return api(`/movies?_page=${page}&_limit=${maxMoviesAtOnce}`, { method: 'GET' });
