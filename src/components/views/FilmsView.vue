@@ -7,7 +7,7 @@
       class="cards"/>
   </div>
   <TailSpin v-show="!isViewLoaded" class="loader"/>
-  <MainButton v-show="isViewLoaded && page <= nbOfMovies / maxMoviesAtOnce" class="display-button" @click="displayMore()">Afficher plus</MainButton>
+  <MainButton v-show="isViewLoaded && page < nbOfMovies / maxMoviesAtOnce" class="display-button" @click="displayMore()">Afficher plus</MainButton>
 </template>
 
 <script setup>

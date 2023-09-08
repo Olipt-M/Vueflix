@@ -49,7 +49,7 @@
       .then(response => {
           // console.log(response.user);
           loginStore.authenticateUser(response.user);
-          router.push({ name: 'homepage'});
+          router.push({ name: 'films'});
       })
       .catch((error) => {
         errorMessage.value = error.data;
