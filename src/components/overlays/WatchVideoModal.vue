@@ -4,8 +4,6 @@
       <div class="modal">
         <div class="modal-content">
           <iframe
-            width="983"
-            height="553"
             :src="`https://www.youtube.com/embed/${movieInfo.youtube}`"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -39,6 +37,7 @@
 </script>
 
 <style lang="scss" scoped>
+  $width_iframe: 983px;
   .modal-enter-from, .modal-leave-to {
     opacity: 0;
   }
@@ -53,11 +52,12 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     background: rgba(0, 0, 0, 0.5);
     z-index: 40;
     transition: opacity 0.3s ease;
+    box-sizing: border-box;
   }
 
   .modal {
@@ -70,13 +70,19 @@
   }
 
   .modal-content {
-    padding: 2rem;
+    padding: 2rem 0;
     display: flex;
     flex-direction: column;
+
+    iframe {
+      width: $width_iframe;
+      height: calc(0.563 * $width_iframe);
+    }
     
     .button {
       display: flex;
       justify-content: end;
+      width: $width_iframe;
 
       button {
         font-family: 'Nunito', sans-serif;
@@ -85,7 +91,26 @@
         background: none;
         border: none;
         cursor: pointer;
-        margin-top: 1rem;
+        margin: 1rem 1rem 0 0;
+      }
+    }
+  }
+
+  @media (max-width: $width_iframe) {
+    $width_iframe: 95vw;
+    
+    .modal-content {
+      iframe {
+        width: $width_iframe;
+        height: calc(0.563 * $width_iframe);
+      }
+      
+      .button {
+        width: $width_iframe;
+
+        button {
+          font-size: $font_size_normal;
+        }
       }
     }
   }
