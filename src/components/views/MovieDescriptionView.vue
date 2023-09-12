@@ -28,12 +28,14 @@
 
     <div class="movie-casting-container">
       <h2>Casting</h2>
-      <div class="actors-cards-container">
-        <ActorCard
-          v-if="movieAndActors.actors"
-          :actor="actor"
-          class="actor-card"
-          v-for="actor in movieAndActors.actors.sort((a, b) => a.order < b.order ? -1 : 1)" :key="actor.id"/>
+      <div class="actors-list">
+        <div class="actors-cards-container">
+          <ActorCard
+            v-if="movieAndActors.actors"
+            :actor="actor"
+            class="actor-card"
+            v-for="actor in movieAndActors.actors.sort((a, b) => a.order < b.order ? -1 : 1)" :key="actor.id"/>
+        </div>
       </div>
     </div>
 
@@ -217,6 +219,11 @@
 
   .movie-casting-container {
     margin: 2rem 1rem 0 1rem;
+  }
+
+  .actors-list {
+    display: grid;
+    place-items: center;
   }
 
   .actors-cards-container {

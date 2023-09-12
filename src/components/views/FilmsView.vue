@@ -1,10 +1,12 @@
 <template>
   <h1>Films</h1>
-  <div class="movies-container">
-    <MovieCard v-for="movie in movies" :key="movie.id"
-      :movie="movie"
-      :isInCart="shopStore.isInCart(movie.id)"
-      class="cards"/>
+  <div class="movies-list">
+    <div class="movies-container">
+      <MovieCard v-for="movie in movies" :key="movie.id"
+        :movie="movie"
+        :isInCart="shopStore.isInCart(movie.id)"
+        class="cards"/>
+    </div>
   </div>
   <TailSpin v-show="!isViewLoaded" class="loader"/>
   <MainButton v-show="isViewLoaded && page < nbOfMovies / maxMoviesAtOnce" class="display-button" @click="displayMore()">Afficher plus</MainButton>
@@ -52,12 +54,6 @@
 </script>
 
 <style lang="scss" scoped>
-  $tabletNumberSmall: 2;
-  $tabletNumberBig: 3;
-  $desktopNumberSmall: 4;
-  $desktopNumberBig: 5;
-  $gapCards: 1rem;
-
   h1 {
     text-align: center;
     margin-top: 3rem;
@@ -70,39 +66,47 @@
     margin: 5rem auto;
   }
 
+  .movies-list {
+    display: grid;
+    place-items: center;
+    max-width: 90%;
+    margin: auto;
+  }
+
   .movies-container {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
     margin: 2rem 1rem;
-    gap: $gapCards;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 0.5rem;
   }
-  
-  .cards {
-    width: calc(100% / $desktopNumberBig - ($gapCards * ($desktopNumberBig - 1) / $desktopNumberBig));
-  }
-// 356px 654px 1030px 1286px
+
   @media (max-width: 1286px) {
-    .cards {
-      width: calc(100% / $desktopNumberSmall - ($gapCards * ($desktopNumberSmall - 1) / $desktopNumberSmall));
+    .movies-list {
+      max-width: 95%;
     }
+    .movies-container {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
   }
 
   @media (max-width: 1030px) {
-    .cards {
-      width: calc(100% / $tabletNumberBig - ($gapCards * ($tabletNumberBig - 1) / $tabletNumberBig));
+    .movies-list {
+      max-width: 100%;
+    }
+    .movies-container {
+      grid-template-columns: 1fr 1fr 1fr;
     }
   }
 
   @media (max-width: 654px) {
-    .cards {
-      width: calc(100% / $tabletNumberSmall - ($gapCards * ($tabletNumberSmall - 1) / $tabletNumberSmall));
+    .movies-container {
+      grid-template-columns: 1fr 1fr;
     }
   }
 
   @media (max-width: 356px) {
-    .cards {
-      width: 100%;
+    .movies-container {
+      grid-template-columns: 1fr;
     }
   }
 

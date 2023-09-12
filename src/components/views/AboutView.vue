@@ -1,16 +1,18 @@
 <template>
   <div class="view-container">
     <h1>A propos</h1>
-    <div class="cards-container">
-      <TeamCard class="cards" v-for="(person, index) in team"
-        :key="index"
-        :picture="person.picture"
-        :name="person.name"
-        :job="person.job"
-        :biography="person.biography"
-        :isOpened="selectedBiography === person.name"
-        @biography="openBiography">
-      </TeamCard>
+    <div class="team-list">
+      <div class="cards-container">
+        <TeamCard class="cards" v-for="(person, index) in team"
+          :key="index"
+          :picture="person.picture"
+          :name="person.name"
+          :job="person.job"
+          :biography="person.biography"
+          :isOpened="selectedBiography === person.name"
+          @biography="openBiography">
+        </TeamCard>
+      </div>
     </div>
   </div>
 </template>
@@ -59,25 +61,31 @@
     font-weight: 600;
   }
 
-  .cards-container {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    margin: 2rem 1rem;
-    gap: $gapCards;
-  }
-  .cards {
-    // margin: $marginCards;
-    width: calc(100% / $desktopNumber - ($gapCards * ($desktopNumber - 1) / $desktopNumber));
+  .team-list {
+    display: grid;
+    place-items: center;
   }
 
-  @media (max-width: 920px) {
-    .cards {
-      width: calc(100% / $tabletNumber - ($gapCards * ($tabletNumber - 1) / $tabletNumber));
+  .cards-container {
+    margin: 2rem 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
+  }
+  .cards {
+    width: 400px;
+  }
+
+  @media (max-width: 1250px) {
+    .cards-container {
+      grid-template-columns: 1fr 1fr;
     }
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 850px) {
+    .cards-container {
+      grid-template-columns: 1fr;
+    }
     .cards {
       width: 100%;
     }
